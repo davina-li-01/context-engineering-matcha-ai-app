@@ -1,157 +1,371 @@
 ---
 version: 1.0
-purpose: Source of Truth for user journeys, personas, and screen flows.
-id_prefix: UJ-XXX, PER-XXX, SCR-XXX
-last_updated: YYYY-MM-DD
-authority: This is a SoT file - IDs here are referenced by PRD.md, EPICs, and other SoT files
+purpose: Source of Truth for user journeys and product flows.
+id_prefix: UJ-XXX
+last_updated: 2026-03-14
+authority: This is a SoT file - IDs here are referenced by PRD.md, EPICs, API contracts, and testing.
 ---
-<!-- SECTION: template-structure -->
 
 # User Journeys (SoT File)
 
-> **Purpose**: User flows, personas, and screen definitions for the product.
-> **ID Prefixes**: UJ-XXX (journeys), PER-XXX (personas), SCR-XXX (screens)
-> **Status**: Active SoT file
-> **Cross-References**: Referenced by PRD.md, SoT.API_CONTRACTS.md, SoT.TESTING.md, EPICs
-
-## Navigation by Category
-
-**Personas** (PER-001 to PER-099):
-
-- [PER-001](#per-001-persona-name) - {Persona name}
-
-**Screens** (SCR-001 to SCR-099):
-
-- [SCR-001](#scr-001-screen-name) - {Screen name}
-
-**Core Journeys** (UJ-001 to UJ-099):
-
-- [UJ-001](#uj-001-journey-name) - {Journey name}
-
-**Feature Journeys** (UJ-101 to UJ-199):
-
-- [UJ-101](#uj-101-journey-name) - {Journey name}
+> **Purpose**: Defines how users interact with the product through structured journeys.  
+> **ID Prefix**: UJ-XXX  
+> **Status**: Active SoT file  
+> **Cross-References**: Referenced by PRD.md, SoT.BUSINESS_RULES.md, SoT.API_CONTRACTS.md, SoT.TESTING.md, EPICs
 
 ---
 
-## PER-001: {Persona Name}
+# Navigation
 
-**ID**: PER-001
-**Status**: Active | Deprecated
-**Created**: YYYY-MM-DD
+### Core User Flows
 
-### Profile
-
-- **Role**: {Job title or role}
-- **Goals**: {What they want to achieve}
-- **Pain Points**: {Current frustrations}
-- **Tech Comfort**: High | Medium | Low
-
-### Related IDs
-
-- [UJ-XXX](#uj-xxx-journey-name) - {Primary journey for this persona}
+- [UJ-101](#uj-101-onboard-and-set-matcha-preferences) – Onboard and set matcha preferences
+- [UJ-102](#uj-102-discover-matcha-cafes) – Discover matcha cafes
+- [UJ-103](#uj-103-save-a-favorite-cafe) – Save a favorite cafe
+- [UJ-104](#uj-104-submit-a-matcha-review) – Submit a matcha review
 
 ---
 
-## SCR-001: {Screen Name}
+# UJ-101: Onboard and Set Matcha Preferences
 
-**ID**: SCR-001
-**Status**: Active | Deprecated | Planned
-**Created**: YYYY-MM-DD
-
-### Purpose
-
-{What this screen accomplishes}
-
-### Key Elements
-
-- {Element 1}
-- {Element 2}
-
-### Related IDs
-
-- [UJ-XXX](#uj-xxx-journey-name) - {Journey containing this screen}
-- [DES-XXX](SoT.DESIGN_COMPONENTS.md#des-xxx) - {Components used}
+**ID**: UJ-101  
+**Status**: Active  
+**Priority**: Critical  
+**Created**: 2026-03-14  
+**Last Updated**: 2026-03-14  
 
 ---
 
-## UJ-001: {Journey Name}
+## Journey Overview
 
-**ID**: UJ-001
-**Category**: Core | Feature | Admin | Error
-**Status**: Active | Deprecated | Planned
-**Created**: YYYY-MM-DD
-**Last Updated**: YYYY-MM-DD
+A new user signs up for MatchaMap and completes a short onboarding survey to establish their matcha taste preferences.
 
-### Overview
-
-- **User Goal**: {What user wants to accomplish}
-- **Trigger**: {What initiates this journey}
-- **Success Criteria**: {How we know it succeeded}
-
-### Steps
-
-1. **{Step}**: {Action} → {Response}
-2. **{Step}**: {Action} → {Response}
-3. **{Step}**: {Action} → {Response}
-
-### Related IDs
-
-- [PER-XXX](#per-xxx-persona-name) - {Persona taking this journey}
-- [SCR-XXX](#scr-xxx-screen-name) - {Screens in this journey}
-- [API-XXX](SoT.API_CONTRACTS.md#api-xxx) - {APIs called}
-- [BR-XXX](SoT.BUSINESS_RULES.md#br-xxx) - {Rules enforced}
-- [DES-XXX](SoT.DESIGN_COMPONENTS.md#des-xxx) - {Components used}
-- [TEST-XXX](SoT.TESTING.md#test-xxx) - {Tests validating this}
-
-<!-- /SECTION: template-structure -->
-
----
-<!-- CUSTOMIZABLE: entries -->
-
-## Deprecated Entries
-
-### UJ-XXX: {Name} [DEPRECATED]
-
-**Status**: Deprecated (YYYY-MM-DD)
-**Replacement**: [UJ-YYY](#uj-yyy-name) | None
-**Reason**: {Why deprecated}
-
-<!-- /CUSTOMIZABLE: entries -->
+These preferences power personalized recommendations.
 
 ---
 
-## Cross-Reference Index
+## Actors
 
-**Journeys by Persona**:
+Primary Actor
 
-- PER-001 uses: UJ-001, UJ-101
+- User
 
-**Journeys by Screen**:
+Supporting Systems
 
-- SCR-001 appears in: UJ-001, UJ-102
+- Recommendation Engine
+- User Profile Service
 
 ---
 
-## Update Protocol
+## Entry Conditions
 
-### When to Add New IDs
+- User opens the app for the first time.
+- User account may or may not exist yet.
 
-1. **PER-XXX**: New user segment or persona identified
-2. **SCR-XXX**: New screen or significant screen redesign
-3. **UJ-XXX**: New user flow from trigger to goal completion
+---
+
+## Steps
+
+1. User opens MatchaMap.
+2. User is prompted to create an account or log in.
+3. User begins matcha preference onboarding.
+4. User answers questions such as:
+   - preferred sweetness level
+   - matcha strength
+   - milk vs no milk
+   - hot vs iced preference
+5. System stores preference data in the user profile.
+6. User completes onboarding.
+7. User is redirected to personalized cafe discovery.
+
+---
+
+## Business Rules Enforced
+
+- [BR-002](SoT.BUSINESS_RULES.md#br-002-preference-onboarding-required)
+
+---
+
+## Success Outcome
+
+User profile now contains matcha taste preferences and the system can generate personalized recommendations.
+
+---
+
+## Failure Scenarios
+
+User skips onboarding.
+
+**Resolution**
+
+User is reminded that onboarding is required before recommendations can be generated.
+
+---
+
+# UJ-102: Discover Matcha Cafes
+
+**ID**: UJ-102  
+**Status**: Active  
+**Priority**: Critical  
+**Created**: 2026-03-14  
+**Last Updated**: 2026-03-14  
+
+---
+
+## Journey Overview
+
+Users explore nearby cafes that serve matcha drinks and receive personalized recommendations based on their taste preferences.
+
+---
+
+## Actors
+
+Primary Actor
+
+- User
+
+Supporting Systems
+
+- Recommendation Engine
+- Cafe Database
+- Location Services
+
+---
+
+## Entry Conditions
+
+- User has completed onboarding.
+- User is logged in.
+
+---
+
+## Steps
+
+1. User opens the discovery page.
+2. System detects user location or prompts for location access.
+3. System retrieves cafes that serve matcha.
+4. Recommendation engine ranks cafes based on:
+   - taste compatibility
+   - popularity
+   - proximity
+5. System displays recommended cafes on a list or map.
+6. User taps a cafe to view details.
+
+---
+
+## Business Rules Enforced
+
+- [BR-001](SoT.BUSINESS_RULES.md#br-001-matcha-only-cafe-listings)
+- [BR-003](SoT.BUSINESS_RULES.md#br-003-personalized-recommendations-priority)
+
+---
+
+## Success Outcome
+
+User finds a cafe that matches their matcha preferences.
+
+---
+
+## Failure Scenarios
+
+Location cannot be detected.
+
+**Resolution**
+
+User manually enters location.
+
+---
+
+# UJ-103: Save a Favorite Cafe
+
+**ID**: UJ-103  
+**Status**: Active  
+**Priority**: Medium  
+**Created**: 2026-03-14  
+**Last Updated**: 2026-03-14  
+
+---
+
+## Journey Overview
+
+Users save cafes they like so they can easily revisit them later.
+
+---
+
+## Actors
+
+Primary Actor
+
+- User
+
+Supporting Systems
+
+- Favorites Service
+- User Profile Database
+
+---
+
+## Entry Conditions
+
+- User is logged in.
+- User is viewing a cafe page.
+
+---
+
+## Steps
+
+1. User opens a cafe detail page.
+2. User taps the "Save Cafe" button.
+3. System adds cafe to the user's favorites list.
+4. User receives confirmation message.
+5. Cafe appears in user's saved cafes list.
+
+---
+
+## Business Rules Enforced
+
+- [BR-201](SoT.BUSINESS_RULES.md#br-201-user-can-save-favorite-cafes)
+
+---
+
+## Success Outcome
+
+Cafe is successfully stored in user's favorites.
+
+---
+
+## Failure Scenarios
+
+Network error occurs during save.
+
+**Resolution**
+
+System prompts user to retry.
+
+---
+
+# UJ-104: Submit a Matcha Review
+
+**ID**: UJ-104  
+**Status**: Active  
+**Priority**: High  
+**Created**: 2026-03-14  
+**Last Updated**: 2026-03-14  
+
+---
+
+## Journey Overview
+
+Users write reviews about matcha drinks they tried at cafes to help other users discover quality matcha.
+
+---
+
+## Actors
+
+Primary Actor
+
+- User
+
+Supporting Systems
+
+- Review Service
+- Moderation System
+
+---
+
+## Entry Conditions
+
+- User is logged in.
+- User is viewing a cafe page.
+
+---
+
+## Steps
+
+1. User taps "Write Review".
+2. User selects the matcha drink they tried.
+3. User provides:
+   - rating
+   - flavor notes
+   - optional photo
+4. User submits the review.
+5. System stores review and attaches it to the cafe page.
+
+---
+
+## Business Rules Enforced
+
+- [BR-101](SoT.BUSINESS_RULES.md#br-101-user-review-authentication)
+- [BR-401](SoT.BUSINESS_RULES.md#br-401-review-rate-limit)
+
+---
+
+## Success Outcome
+
+Review is successfully published and visible to other users.
+
+---
+
+## Failure Scenarios
+
+User exceeds daily review limit.
+
+**Resolution**
+
+User receives limit message and can try again later.
+
+---
+
+# Cross-Reference Index
+
+### Journeys by Business Rule
+
+BR-001
+
+- UJ-102
+
+BR-002
+
+- UJ-101
+
+BR-003
+
+- UJ-102
+
+BR-101
+
+- UJ-104
+
+BR-201
+
+- UJ-103
+
+BR-401
+
+- UJ-104
+
+---
+
+# Update Protocol
+
+### When to Add New UJ-XXX IDs
+
+1. New feature introduces a user interaction flow
+2. Existing flow significantly changes
+3. Product expansion creates a new journey
+
+---
 
 ### Bidirectional Reference Checklist
 
-When adding a new UJ/PER/SCR-XXX:
+When adding a new UJ-XXX:
 
-- [ ] Update SoT.API_CONTRACTS.md for APIs used
-- [ ] Update SoT.BUSINESS_RULES.md for rules enforced
-- [ ] Update SoT.DESIGN_COMPONENTS.md for UI components
-- [ ] Update SoT.TESTING.md with validation tests
-- [ ] Update EPIC Section 2 "Context & IDs" list
-- [ ] Update SoT.UNIQUE_ID_SYSTEM.md registry if maintained
+- [ ] Update PRD.md
+- [ ] Update SoT.BUSINESS_RULES.md
+- [ ] Update SoT.API_CONTRACTS.md
+- [ ] Update SoT.TESTING.md
+- [ ] Update EPIC documentation
 
 ---
 
-*End of SoT.USER_JOURNEYS.md - Authoritative source for UJ-XXX, PER-XXX, SCR-XXX IDs*
+*End of SoT.USER_JOURNEYS.md — Authoritative source for all UJ-XXX user flows*

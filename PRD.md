@@ -1,11 +1,4 @@
----
-version: 2.0
-purpose: Progressive Product Requirements Document aligned to the PRD Led Context Engineering lifecycle.
-last_updated: 2025-12-22
-template_version: "3.0.0"
----
-
-# [Product Name] · Product Requirements Document (PRD)
+# MatchaMap · Product Requirements Document (PRD)
 
 **Authority & Workflow**
 
@@ -24,332 +17,296 @@ template_version: "3.0.0"
 
 ---
 
-## PRD Metadata
+# PRD Metadata
 
-| Field                      | Value                              |
-| -------------------------- | ---------------------------------- |
-| **Current Lifecycle Gate** | v0.x                               |
-| **Last Updated**           | 2025-12-22                         |
-| **Last Editor**            | {Name / Agent}                     |
-| **Status**                 | Discovery / Build / Live           |
-| **Next Target Gate**       | v0.{x+1}                           |
-| **Related EPIC**           | EPIC-{XX}                          |
-| **SoT Snapshot**           | {List key IDs touched this update} |
-
-## Lifecycle Change Log
-
-| Version                | Date       | Editor  | Summary                              | Linked IDs / EPIC   |
-| ---------------------- | ---------- | ------- | ------------------------------------ | ------------------- |
-| v0.1 Spark             | YYYY-MM-DD | {Owner} | Problem + outcomes framed            | CFD-###             |
-| v0.2 Market Definition | YYYY-MM-DD | {Owner} | ICP + segmentation                   | BR-###              |
-| v0.3 Commercial Model  | YYYY-MM-DD | {Owner} | Pricing & positioning hypotheses     | BR-###, CFD-###     |
-| v0.4 User Journeys     | YYYY-MM-DD | {Owner} | Journeys mapped to pains             | UJ-###              |
-| v0.5 Red Team Review   | YYYY-MM-DD | {Owner} | Risks + mitigations                  | BR-###, TEST-###    |
-| v0.6 Architecture      | YYYY-MM-DD | {Owner} | Stack, schema, contracts baseline    | API-###, DBT-###    |
-| v0.7 Build Execution   | YYYY-MM-DD | {Owner} | EPIC backlog & QA strategy           | EPIC-{XX}, TEST-### |
-| v0.8 Release & Deployment | YYYY-MM-DD | {Owner} | Release criteria + ops playbook   | DEP-###             |
-| v0.9 Go-to-Market      | YYYY-MM-DD | {Owner} | GTM, analytics, feedback loop        | GTM-### / CFD-###   |
-| v1.0 Market Adoption   | YYYY-MM-DD | {Owner} | Paying customers + optimization plan | BR-###, KPI-###     |
-
-> **Revision Pattern**: When looping back, add a new row (e.g., `v0.3r1`) and reference the EPIC that triggered the revision.
+| Field | Value |
+|------|------|
+| **Current Lifecycle Gate** | v0.1 |
+| **Last Updated** | 2026-03-14 |
+| **Last Editor** | Davina Li |
+| **Status** | Discovery |
+| **Next Target Gate** | v0.2 |
+| **Related EPIC** | EPIC-01 |
+| **SoT Snapshot** | BR-001, BR-002 |
 
 ---
 
-## v0.1 Spark — Problem & Outcomes
+# Lifecycle Change Log
 
-**Spark Summary**  
-{Short paragraph describing the spark, audience, and outcomes. Elevator pitch style.}
-
-**Problem Statement**
-
-- **Who is hurting?** {Segment / persona}
-- **What pain exists today?** {Short description}
-- **Why now?** {Trigger or catalyst}
-
-**Desired Outcomes**
-
-- {Outcome 1 — measurable}
-- {Outcome 2 — measurable}
-
-**Initial Success Signals**
-
-- Metric: {Signal / Source} (Target: {value})
-- Insight IDs: {CFD-###, note or link}
-
-**Constraints & Non-goals**
-
-- {Constraint 1}
-- {Non-goal 1}
-
-**Open Questions** (must be answered before v0.2)
-
-- {Question}
-- {Question}
+| Version | Date | Editor | Summary | Linked IDs / EPIC |
+|------|------|------|------|------|
+| v0.1 Spark | 2026-03-14 | Davina Li | Defined problem and product vision for matcha discovery platform | CFD-001 |
+| v0.2 Market Definition | TBD | TBD | ICP + segmentation | BR-### |
+| v0.3 Commercial Model | TBD | TBD | Pricing & positioning hypotheses | BR-### |
+| v0.4 User Journeys | TBD | TBD | Journey mapping | UJ-### |
+| v0.5 Red Team Review | TBD | TBD | Risks and mitigations | RISK-### |
+| v0.6 Architecture | TBD | TBD | Stack and API contracts | API-### |
+| v0.7 Build Execution | TBD | TBD | Epic backlog | EPIC-### |
+| v0.8 Release & Deployment | TBD | TBD | Deployment readiness | DEP-### |
+| v0.9 Go-to-Market | TBD | TBD | Launch strategy | GTM-### |
+| v1.0 Market Adoption | TBD | TBD | Optimization strategy | KPI-### |
 
 ---
 
-## v0.2 Market Definition — ICP & Segments
+# v0.1 Spark — Problem & Outcomes
 
-**Market Thesis**  
-{Short narrative referencing Spark outcomes.}
+## Spark Summary
 
-**Primary Segments (max 3)**
-| Segment | Description | Size / TAM | Urgency | Source (ID) |
-|---------|-------------|------------|---------|-------------|
-| Segment A | {Persona / firmographics} | {Value} | {High/Med/Low} | CFD-### |
-
-**Not For**
-
-- {Who we explicitly exclude and why}
-
-**Enabling Business Rules (BR-XXX)**
-
-- BR-### — {Rule description}
-- BR-### — {Rule description}
-
-**Research & Evidence**
-
-- CFD-### — {Interview / survey insight}
-- CFD-### — {Desk research}
-
-**Outstanding Work → v0.3**
-
-- {Hypothesis or question}
+MatchaMap is a web application that helps users discover high-quality matcha drinks based on their taste preferences and location. The platform combines personalized recommendations, cafe discovery, and community reviews to solve the problem of inconsistent matcha quality.
 
 ---
 
-## v0.3 Commercial Model — Pricing & Positioning
+## Problem Statement
 
-> **ID Note**: FEA-XXX (Feature) IDs are defined inline in this section, not in a separate SoT file.
+**Who is hurting?**
 
-**Anchor Competitors**
-| Competitor | Positioning | Pricing Signals | Reference |
-|------------|-------------|-----------------|-----------|
-| {Name} | {Value prop} | ${price}/unit | CFD-### |
+Matcha drinkers who want to find high-quality matcha cafes.
 
-**Monetization Strategy**
+**What pain exists today?**
 
-- Model: {Usage / Seat / Tiered}
-- Primary KPI: {MRR / ACV / etc}
-- Pricing Guardrails: {Range or constraints}
+- Matcha quality varies dramatically between cafes
+- Cafe review platforms do not highlight matcha quality
+- Users rely on social media or word of mouth to find good matcha
 
-**Moat Thesis**
+**Why now?**
 
-- {What makes us 1–10% better/cheaper}
-- Supporting IDs: BR-###, CFD-###
+Matcha consumption is rapidly increasing due to:
 
-**Experiments & Fast-Follow Plans**
+- wellness trends
+- specialty coffee culture
+- social media exposure
 
-- {Experiment summary} → ID: BR-### / TEST-###
-
-**Outstanding Work → v0.4**
-
-- {Hypothesis requiring user validation}
+Yet there is **no platform focused specifically on matcha discovery**.
 
 ---
 
-## v0.4 User Journeys — From Pain to Value
+## Desired Outcomes
 
-**Journey Overview**
-| ID | Persona | Trigger | Key Steps | Pain Points | Moments of Value |
-|----|---------|---------|-----------|-------------|------------------|
-| UJ-### | {Persona} | {Trigger} | {Steps summary} | {Pain} | {Value}
-
-**Journey Narratives**
-
-- **UJ-### – {Title}**
-  - Step Flow: {1 → 2 → 3}
-  - Dependencies: BR-###, API-###
-  - Opportunity Notes: {Design or build implications}
-
-**UX / Research Assets**
-
-- Link: `SoT/SoT.USER_JOURNEYS.md#uj-###`
-- Additional references: {Figma / research IDs}
-
-**Outstanding Work → v0.5**
-
-- {Risk or open question to stress-test}
+- Users easily find cafes that serve high-quality matcha.
+- Users receive personalized matcha recommendations based on taste.
+- Users contribute reviews that improve discovery for others.
 
 ---
 
-## v0.5 Red Team Review — Risks & Mitigations
+## Initial Success Signals
 
-> **ID Note**: RISK-XXX IDs are defined inline in this section, not in a separate SoT file.
-> **Scoring**: Each RISK- maps to a scoring category (Market/User/Technical). Score = Impact × Likelihood × Status Weight. See `assets/risk.md` for full scoring reference.
-> **Continuous**: This register is a living document. New RISK- entries can be added at any stage (v0.5–v1.0). Update the README Risk Scorecard when entries change.
+Metric:  
+Users completing matcha taste preference onboarding (Target: 70%)
 
-**Risk Register**
+Metric:  
+Weekly matcha cafe searches per user (Target: 3+)
 
-| ID | Scoring | Risk | Impact | Likelihood | Raw | Status | Eff. Score | Mitigation | Linked IDs |
-|----|---------|------|--------|------------|-----|--------|------------|------------|------------|
-| RISK-### | {Market/User/Technical} | {Risk description} | {H/M/L} | {H/M/L} | {1-9} | {open} | {score} | {Mitigation action} | BR-### |
+Insight IDs:
 
-<!-- Risk Scoring Quick Reference:
-  Impact: High=3, Medium=2, Low=1 | Likelihood: High=3, Medium=2, Low=1
-  Raw = Impact × Likelihood
-  Status Weights: open=1.0, accepted=1.0, mitigating=0.5, mitigated=0.25, resolved=0.0
-  Effective Score = Raw × Status Weight
--->
-
-**Development Challenges (Flag for EPIC Planning)**
-
-- {Challenge} → Impacted IDs: API-###, TEST-###
-
-**Security / Compliance Notes**
-
-- {Requirement} → BR-### / DEP-###
-
-**Outstanding Work → v0.6**
-
-- {Architecture question to resolve}
+CFD-001 — Informal research showing users rely heavily on social media for matcha recommendations.
 
 ---
 
-## v0.6 Architecture — Technical Blueprint
+## Constraints & Non-goals
 
-**System Overview**
+Constraints
 
-- Architecture summary referencing TECHNICAL_ARCHITECTURE.md (ID: ARC-### if used).
+- Initial dataset of cafes may be limited
+- Matcha quality data may rely on user reviews
 
-**API Contracts (API-XXX)**
+Non-goals
 
-- API-### — {Endpoint purpose} (Method, Auth, Success / Error states)
-
-**Data Model (DBT-XXX)**
-
-- DBT-### — {Table / model} (Primary keys, relationships)
-
-**Integration Notes**
-
-- External dependencies, rate limits, compliance.
-
-**Outstanding Work → v0.7**
-
-- {Implementation open question}
+- General restaurant discovery
+- Food delivery services
+- Non-matcha beverage discovery
 
 ---
 
-## v0.7 Build Execution — Plan for Delivery
+## Open Questions
 
-**EPIC Backlog Overview**
-| EPIC | Objective | Lifecycle Impact | Status | Notes |
-|------|-----------|------------------|--------|-------|
-| EPIC-{XX} | {Outcome} | Advances to v0.{x+1} | 🚧 | {Summary}
-
-**Testing Strategy Snapshot (TEST-XXX)**
-
-- TEST-### — {Scope}
-- TEST-### — {Scope}
-
-**Definition of Done**
-
-- [ ] All IDs created/modified logged in EPIC Section 2.
-- [ ] README metrics updated via workflow.
-- [ ] Coverage thresholds defined.
-
-### Deployment Configuration
-
-Deployment configuration should be established early in v0.7 to avoid late-stage integration issues. Document the following in `SoT/SoT.DEPLOYMENT.md`:
-
-#### Environments
-| Environment | Purpose | Trigger | URL Pattern |
-|-------------|---------|---------|-------------|
-| Production | Live users | Merge to main | Primary domain |
-| Preview/Staging | Pre-merge testing | Pull request | Branch-based URLs |
-| Development | Local development | N/A | localhost |
-
-#### Branch Strategy
-Define branch naming conventions and their deployment behavior:
-- `main` — Production deployments only
-- `feature/*` — Preview deployments for testing
-- `fix/*` — Preview deployments for bug verification
-- `experiment/*` — Preview deployments for exploration (may be abandoned)
-
-#### Quality Gates
-Specify required checks before code reaches production:
-1. **Automated** — Lint, type checking, unit tests (CI pipeline)
-2. **Manual** — Preview deployment smoke test
-3. **Optional** — E2E tests against preview environment
-
-#### Platform Configuration
-For each deployment target (web, mobile, API), document:
-- Hosting platform and tier
-- Environment variable management approach
-- Build configuration location
-- Secrets that require setup (reference `SoT/SoT.DEPLOYMENT.md` Secrets Inventory)
-
-#### Mobile-Specific (if applicable)
-- Code signing approach (manual, automated, or managed)
-- Beta distribution channel (TestFlight, Play Store Internal, etc.)
-- Release tagging convention (e.g., `v1.0.0` for production, `v1.0.0-beta.1` for beta)
-
-**Outstanding Work → v0.8**
-
-- {Deployment or operational prep item}
+- Should recommendations prioritize **taste compatibility or distance**?
+Answer: There should be a separate parameter page that indicates a users preference on what they want to focus on. 
+- Should cafes be curated manually initially?
+Answer: There should be a mini quiz on matcha preferences and also one of the questions being for users to add and rank matcha they like already. 
+- Should matcha powder brand be included in the dataset?
+Answer: For future iterations potentially, but for the first version no.
 
 ---
 
-## v0.8 Release & Deployment — Operational Readiness
+# v0.2 Market Definition — ICP & Segments
 
-**Release Checklist**
+## Market Thesis
 
-- [ ] Deployment environments configured (DEP-###).
-- [ ] Monitoring & alerting baselined.
-- [ ] Runbooks documented.
-
-**Operational Policies**
-
-- {Policy} → DEP-###
-
-**Outstanding Work → v0.9**
-
-- {GTM requirement}
+Matcha consumption continues to grow globally, but no discovery platform specializes in matcha quality or taste preferences. MatchaMap addresses this gap by combining personalization and location discovery.
 
 ---
 
-## v0.9 Go-to-Market — Launch & Feedback
+## Primary Segments
 
-> **ID Note**: GTM-XXX (Go-to-Market) IDs are defined inline in this section, not in a separate SoT file.
-
-**Launch Plan Summary**
-
-- Channels: {Email / Sales / Community}
-- Messaging Pillars: {1-3 bullets}
-- Launch Owner: {Name / Team}
-
-**Analytics & Feedback Loop**
-
-- Key Metrics: {Metric + target}
-- Feedback Sources: {CFD-###, analytics dashboards}
-
-**Outstanding Work → v1.0**
-
-- {Adoption / revenue milestone}
+| Segment | Description | Size / TAM | Urgency | Source |
+|------|------|------|------|------|
+| Casual Matcha Drinkers | People who occasionally drink matcha lattes | Large | Medium | CFD-001 |
+| Matcha Enthusiasts | Users who care about ceremonial grade matcha | Medium | High | CFD-002 |
+| Cafe Explorers | Food & drink enthusiasts seeking specialty cafes | Large | Medium | CFD-003 |
 
 ---
 
-## v1.0 Market Adoption — Optimize & Expand
+## Not For
 
-**Adoption Status**
-
-- Paying Customers: {# / MRR}
-- Usage Health: {Metric + target}
-
-**Optimization Backlog**
-
-- {Idea / hypothesis} → EPIC-{YY}
-
-**Future Bets & Loopbacks**
-
-- {Potential revisits to earlier lifecycle stages}
+- Generic restaurant discovery
+- Coffee-only discovery apps
+- Food delivery platforms
 
 ---
 
-## Appendices & References
+## Enabling Business Rules
 
-- **Glossary**: {Terms and definitions}
-- **ID Index**: Link to `SoT/SoT.UNIQUE_ID_SYSTEM.md` (Part 2: ID Registry).
-- **Supporting Docs**: {Links to research, design, architecture}
+BR-001 — Only cafes serving matcha drinks appear in search results.
 
-> Maintain appendices as lightweight navigation helpers. All authoritative data must live in SoT files referenced above.
+BR-002 — Users must complete preference onboarding to receive personalized recommendations.
+
+BR-003 — Recommendations prioritize taste compatibility with user profile.
+
+---
+
+## Research & Evidence
+
+CFD-001 — Social media search trends showing high interest in matcha cafes.
+
+CFD-002 — Interview feedback from matcha drinkers indicating difficulty finding high-quality matcha.
+
+---
+
+# v0.3 Commercial Model — Pricing & Positioning
+
+## Anchor Competitors
+
+| Competitor | Positioning | Pricing | Reference |
+|------|------|------|------|
+| Yelp | General restaurant discovery | Free | CFD-004 |
+| Google Maps | Location discovery | Free | CFD-004 |
+
+---
+
+## Monetization Strategy
+
+Model
+
+Freemium discovery platform.
+
+Revenue Sources
+
+- Featured cafe listings
+- Affiliate partnerships with cafes
+- Premium discovery filters
+
+Primary KPI
+
+Monthly Active Users.
+
+---
+
+## Moat Thesis
+
+MatchaMap focuses specifically on matcha taste preferences and quality, creating a niche discovery platform unavailable on generic review sites.
+
+Supporting IDs
+
+BR-001, CFD-002
+
+---
+
+# v0.4 User Journeys — From Pain to Value
+
+| ID | Persona | Trigger | Key Steps | Pain | Value |
+|------|------|------|------|------|------|
+| UJ-101 | Casual drinker | Wants matcha nearby | Open app → discover cafes | Hard to find good matcha | Personalized recommendations |
+
+---
+
+## Journey Narratives
+
+### UJ-101 — Discover Matcha Cafe
+
+Step Flow
+
+User opens app  
+→ enters preferences  
+→ views map of recommended cafes  
+→ selects cafe  
+→ visits cafe
+
+Dependencies
+
+BR-001  
+API-001
+
+---
+
+# v0.5 Red Team Review — Risks & Mitigations
+
+| ID | Risk | Impact | Likelihood | Mitigation |
+|------|------|------|------|------|
+| RISK-001 | Limited cafe data | High | Medium | Start with curated cafe list and preference form|
+
+---
+
+# v0.6 Architecture — Technical Blueprint
+
+System Overview
+
+Web-based platform for matcha discovery and recommendation.
+
+---
+
+## API Contracts
+
+API-001 — GET /cafes  
+Returns cafes serving matcha.
+
+API-002 — GET /recommendations  
+Returns personalized matcha cafe recommendations.
+
+API-003 — POST /review  
+Submit matcha drink review.
+
+---
+
+# v0.7 Build Execution — Plan for Delivery
+
+| EPIC | Objective | Status |
+|------|------|------|
+| EPIC-01 | Matcha preference onboarding | Planned |
+| EPIC-02 | Cafe discovery map | Planned |
+| EPIC-03 | Recommendation engine | Planned |
+| EPIC-04 | User reviews | Planned |
+
+---
+
+# v0.8 Release & Deployment — Operational Readiness
+
+Release checklist
+
+- Deployment environments configured
+- Monitoring established
+- Runbooks documented
+
+---
+
+# v0.9 Go-to-Market — Launch
+
+Launch strategy
+
+- Partner with popular matcha cafes
+- Promote through social media
+- Encourage early reviews
+
+---
+
+# v1.0 Market Adoption — Growth
+
+Adoption goals
+
+- 50 users
+- active cafe discovery in major cities
+
+Future expansion
+
+- additional cities
+- advanced recommendation algorithms
+- community-driven matcha rankings
