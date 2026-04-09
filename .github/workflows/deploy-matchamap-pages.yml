@@ -44,6 +44,7 @@ jobs:
           path: matchamap-web/dist
 
   deploy:
+    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_GITHUB_PAGES_DEPLOY == 'true'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

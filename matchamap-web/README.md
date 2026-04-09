@@ -25,7 +25,7 @@ Suggested commands:
 
 ## Google Maps setup
 
-Create [matchamap-web/.env.local](.env.local):
+Create a local `.env.local` file (see template: [.env.example](.env.example)):
 
 ```bash
 VITE_GOOGLE_MAPS_API_KEY=your_google_maps_key
