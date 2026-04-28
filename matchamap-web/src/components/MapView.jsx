@@ -1,77 +1,107 @@
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "360px",
-  borderRadius: "14px"
-};
+// Fix default Leaflet marker icon paths broken by bundlers
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png"
+});
+
+const recommendedIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+const userIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
 function fallbackCenter(cafes, userCoords) {
-  if (userCoords) {
-    return userCoords;
-  }
+  if (userCoords) return [userCoords.lat, userCoords.lng];
+  if (cafes[0]) return [cafes[0].latitude, cafes[0].longitude];
+  return [40.7128, -74.006];
+}
 
-  if (cafes[0]) {
-    return { lat: cafes[0].latitude, lng: cafes[0].longitude };
-  }
-
-  return { lat: 42.3601, lng: -71.0589 };
+function RecenterMap({ center }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, map.getZoom());
+  }, [center[0], center[1]]); // eslint-disable-line react-hooks/exhaustive-deps
+  return null;
 }
 
 function MapView({ cafes, recommendations, userCoords }) {
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const recommendedIds = new Set(recommendations.map((item) => item.id));
-
-  const { isLoaded } = useJsApiLoader({
-    id: "matchamap-google-map",
-    googleMapsApiKey: apiKey || ""
-  });
-
   const center = fallbackCenter(cafes, userCoords);
 
   return (
     <section className="card">
-      <h2>Map View</h2>
-      {!apiKey ? (
-        <p className="hint">
-          Add <strong>VITE_GOOGLE_MAPS_API_KEY</strong> to enable interactive maps.
-        </p>
-      ) : null}
-
-      {!apiKey || !isLoaded ? (
-        <div className="map-fallback">
-          {cafes.map((cafe) => (
-            <p key={cafe.id}>
-              {recommendedIds.has(cafe.id) ? "✅" : "•"} {cafe.name} ({cafe.latitude.toFixed(3)},{" "}
-              {cafe.longitude.toFixed(3)})
-            </p>
-          ))}
-        </div>
-      ) : (
-        <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={12}>
-          {cafes.map((cafe) => (
+      <h2>Map View 🗺️</h2>
+      <p className="hint" style={{ marginTop: 0 }}>
+        Powered by OpenStreetMap — no API key required. &nbsp;
+        <span style={{ color: "#16a34a" }}>●</span> Recommended &nbsp;
+        <span style={{ color: "#6b7280" }}>●</span> All cafes &nbsp;
+        {userCoords && (
+          <>
+            <span style={{ color: "#3b82f6" }}>●</span> You
+          </>
+        )}
+      </p>
+      <MapContainer
+        center={center}
+        zoom={12}
+        style={{ width: "100%", height: "400px", borderRadius: "10px" }}
+        scrollWheelZoom={true}
+      >
+        <RecenterMap center={center} />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {cafes.map((cafe) => {
+          const isRecommended = recommendedIds.has(cafe.id);
+          return (
             <Marker
               key={cafe.id}
-              position={{ lat: cafe.latitude, lng: cafe.longitude }}
-              title={`${cafe.name}${recommendedIds.has(cafe.id) ? " (Recommended)" : ""}`}
-            />
-          ))}
-          {userCoords ? (
-            <Marker
-              position={userCoords}
-              title="You"
-              icon={{
-                path: window.google.maps.SymbolPath.CIRCLE,
-                scale: 7,
-                fillColor: "#0f766e",
-                fillOpacity: 1,
-                strokeWeight: 2,
-                strokeColor: "#ffffff"
-              }}
-            />
-          ) : null}
-        </GoogleMap>
-      )}
+              position={[cafe.latitude, cafe.longitude]}
+              icon={isRecommended ? recommendedIcon : new L.Icon.Default()}
+            >
+              <Popup>
+                <strong>{cafe.name}</strong>
+                <br />
+                {cafe.location}
+                <br />⭐ {cafe.rating.toFixed(1)}
+                {isRecommended && (
+                  <>
+                    <br />
+                    <span style={{ color: "#16a34a" }}>✅ Recommended for you</span>
+                  </>
+                )}
+              </Popup>
+            </Marker>
+          );
+        })}
+        {userCoords && (
+          <Marker position={[userCoords.lat, userCoords.lng]} icon={userIcon}>
+            <Popup>📍 You are here</Popup>
+          </Marker>
+        )}
+      </MapContainer>
     </section>
   );
 }
